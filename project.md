@@ -1,6 +1,6 @@
 ## My Project
 
-Test
+Predicting Southern Great Plains Afternoon Precipitation Events
 
 ***
 
@@ -8,7 +8,17 @@ Test
 
 Here is a summary description of the topic. Here is the problem. This is why the problem is important.
 
+- Rainfall forecasting important for these reasons: extreme weather events (e.g., hurricanes, rain- and snow-storms) often create dire situations (e.g., floods, landslides, and wildfires) causing severe economic losses and casualties. As global warming continues, the
+frequency and intensity of extreme weather events are likely to increase in many regions (https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2022GL097904) 
+  
+- Machine learning approach important for these reasons: existing models use complex statistical models that are often too costly, both computationally and budgetary, or are not applied to downstream applications (https://www.sciencedirect.com/science/article/pii/S266682702100102X)
+  
+- SGP hot spot for land-atmosphere interactions: Numerous studies have addressed the effect of soil moisture on
+subsequent rainfall, yet consensus remains elusive (https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2018GL078598) 
+
 There is some dataset that we can use to help solve this problem. This allows a machine learning approach. This is how I will solve the problem using supervised/unsupervised/reinforcement/etc. machine learning.
+
+- 
 
 We did this to solve the problem. We concluded that...
 
