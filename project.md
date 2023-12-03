@@ -26,9 +26,32 @@ We did this to solve the problem. We concluded that...
 
 Here is an overview of the dataset, how it was obtained and the preprocessing steps taken, with some plots!
 
+- I used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) central facility (CF) and the region within a 50-km radius of the CF for the period of 2001-2019. The data is publically available at this website: https://www.arm.gov/data/. 
+
+1) Product 1: SONDEWNPN
+Description: Radiosonde balloon observations to obtain atmospheric surface variables. The variables of interest in this study were temperature, humidity, pressure and dewpoint.
+
+2) Product 2: Oklahoma Mesonet Soil Moisture (OKMSOIL)
+Description: Soil moisture measured by soil moisture sensors. The variable of interest in this study was fractional water index (FWI).
+
+3) Product 3: Arkansas-Red Basin River Forecast Center (ABRFC)
+Description: hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998)
+
+
+The preprocessing steps involved: 
+- For each product, handled outliers
+- Calculated APEs
+- Merged soundings, precipitation and soil moisture into one result dataframe
+- Observed outliers and correlations between variables
+- Used an oversampling function to adjust for imbalanced data
+- Used standard scaler function to normalize the data
+
 ![](assets/IMG/datapenguin.png){: width="500" }
 
 *Figure 1: Here is a caption for my diagram. This one shows a pengiun [1].*
+
+
+
 
 ## Modelling
 
@@ -64,7 +87,8 @@ Here is a brief summary. From this work, the following conclusions can be made:
 Here is how this work could be developed further in a future project.
 
 ## References
-[1] DALL-E 3
+[[1] DALL-E 3]
+(https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/)https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/
 
 [back](./)
 
