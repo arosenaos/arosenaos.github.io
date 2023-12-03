@@ -46,7 +46,7 @@ The preprocessing steps involved:
 - Used an oversampling function to adjust for imbalanced data
 - Used standard scaler function to normalize the data
 
-![](assets/IMG/features_histogram.png){: width="500" }
+![](assets/IMG/features_histogram.png){: width="1000" }
 
 *Figure 1: Here is a caption for my diagram. This one shows a pengiun [1].*
 
