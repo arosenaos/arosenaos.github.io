@@ -38,19 +38,23 @@ Description: Soil moisture measured by soil moisture sensors. The variable of in
 Description: hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998)
 
 
-The preprocessing steps involved: 
-- For each product, handled outliers
-- Calculated APEs
-- Merged soundings, precipitation and soil moisture into one result dataframe
-- Observed outliers and correlations between variables
-- Used an oversampling function to adjust for imbalanced data
-- Used standard scaler function to normalize the data
+The preprocessing steps involved filtering each product such that I only extracted warm season (May - September) days between 2001-2019. I also colocated each product so that the soundings, precipitation and soil moisture files all exist within a 50km range of the ARM SGP Central Facility site. For every file in each product, I replaced missing data with NAN values and filtered all files such that I only kept the files that did not contain an excessive amount of missing information. For the precipitation product, I calculated an "afternoon precipitation event" (APE) as days in which afternoon precipitation was i) greater than morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning. Below displays the code that calculated APEs:
+
+```python
+pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['precip_6_13']) & \
+                (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['precip_21_24']) & \
+                (pdf_time_ranges['precip_14_20'] > 2 * pdf_time_ranges['precip_6_13'])
+
+pdf = pdf_time_ranges[['date','APE']]
+```
+
+Once each product was preprocessed and saved within its own dataframe, I joined all soundings, precipitation and soil moisture into one result dataframe. Since my result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions. Finally, I plotted histograms and box plots of each feature in order to get a sense of the distributions of these variables.     
 
 ![](assets/IMG/features_histogram.png){: width="1000" }
 
-*Figure 1: Here is a caption for my diagram. This one shows a pengiun [1].*
+*Figure 1: Histograms of each feature variable.*
 
-
+![](assets/IMG/features_box.png){: width="1000" }
 
 
 ## Modelling
