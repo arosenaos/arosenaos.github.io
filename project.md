@@ -128,15 +128,15 @@ Figure X shows... [description of Figure X].
 
 ## Discussion
 
-From Figure X, one can see that... [interpretation of Figure X].
+From Figure 4, one can see that the most highly ranked feature in descending order is: temperature, dewpoint, pressure and fractional water index. While there is clearly a descending order or importance for these features, they are all relatively ranked around the same importance (ranging from 0.27 - 0.23).      
 
 ## Conclusion
 
 Here is a brief summary. From this work, the following conclusions can be made:
-* first conclusion
-* second conclusion
 
-Here is how this work could be developed further in a future project.
+There is no feature that stands out as being particularly determining of APEs. Thus it's possible that each of these features work in concert with one another and have equal importance in determining afternoon rainfall. Additionally, noteably, fractional water index is similarly ranked with the other features. A conclusion can be drawn that precipitation in the Southern Great Plains region is nearly as determined by soil moisture as surface level atmospheric conditions. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during warm season.  
+
+Future work involves including more features such as wind speed and relative humidity. 
 
 ## References
 [[1] DALL-E 3]
