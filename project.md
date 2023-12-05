@@ -42,6 +42,10 @@ Description: hourly gridded precipitation based on WSR-88D Nexrad radar precipit
 The preprocessing steps involved filtering each product such that I only extracted warm season (May - September) days between 2001-2019. I also colocated each product so that the soundings, precipitation and soil moisture files all exist within a 50km range of the ARM SGP Central Facility site. For every file in each product, I replaced missing data with NAN values and filtered all files such that I only kept the files that did not contain an excessive amount of missing information. For the precipitation product, I calculated an "afternoon precipitation event" (APE) as days in which afternoon precipitation was i) greater than morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning. Below displays the code that calculated APEs:
 
 ```python
+##precip_6_13 = total morning precipitation (between hours 6-13 LST)
+##precip_14-20 = total afternoon precipitation (between hours 14-20 LST)
+##precip_21_24 = total evening precipitation (between hours 21-24 LST)
+
 pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['precip_6_13']) & \
                 (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['precip_21_24']) & \
                 (pdf_time_ranges['precip_14_20'] > 2 * pdf_time_ranges['precip_6_13'])
@@ -59,7 +63,7 @@ Once each product was preprocessed and saved within its own dataframe, I joined 
 
 *Figure 2: Boxplots of each feature variable.*
 
-![](assets/IMG/features_heatmap.png){: width="1000" }
+![](assets/IMG/features_heatmap.png){: width="500" }
 
 *Figure 3: Correlation heatmap of each feature variable.*
 
@@ -68,15 +72,46 @@ Once each product was preprocessed and saved within its own dataframe, I joined 
 
 Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
 
+In order to predict an afternoon precipitation event from morning land-surface and atmospheric conditions, I used a RandomForestClassifier from the Python SciPy package. This model was deemed most appropriate for this dataset for several reasons. First, the target variable was labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is less sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in figure 2), this model could appropriately handle these inputs.    
+
 The model might involve optimizing some quantity. You can include snippets of code if it is helpful to explain things.
 
+After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler) because it was much more common that an APE did not occur (False case) than an APE did occur (True case). This function resamples the training data so that the RandomForestClassifier runs on training data that is balanced in True and False cases. 
+
 ```python
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.datasets import make_classification
-X, y = make_classification(n_features=4, random_state=0)
-clf = ExtraTreesClassifier(n_estimators=100, random_state=0)
-clf.fit(X, y)
-clf.predict([[0, 0, 0, 0]])
+features = sfc_df.drop('ape', axis=1)
+target = sfc_df.ape
+
+X_train, X_test, y_train, y_test = train_test_split(features,
+                                      target,
+                                      test_size=0.2,
+                                      stratify=target,
+                                      random_state=2)
+ 
+ros = RandomOverSampler(sampling_strategy='minority',
+                        random_state=22)
+
+X_resampled, y_resampled = ros.fit_resample(X_train, y_train)
+```
+
+Next, I leveraged a random search algorithm (RandomizedSearchCv) in order to tune the hyperparameters to identify the optimum max_depth and n_estimators. 
+
+```python
+param_dist = {'n_estimators': randint(50, 500),
+              'max_depth': randint(1, 50)} 
+
+rf = RandomForestClassifier()
+
+rand_search = RandomizedSearchCV(rf, 
+                                 param_distributions = param_dist, 
+                                 n_iter=5, 
+                                 cv=5)
+
+rand_search.fit(X_resampled, y_resampled)
+
+best_rf = rand_search.best_estimator_
+
+print('Best hyperparameters:',  rand_search.best_params_)
 ```
 
 This is how the method was developed.
