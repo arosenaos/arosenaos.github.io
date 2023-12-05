@@ -7,7 +7,7 @@ https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/
 
 ## Introduction 
 
-Here is a summary description of the topic. Here is the problem. This is why the problem is important.
+Here is a summary description of the topic. Here is the problem. This is why the problem is important. https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL097904 
 
 - Rainfall forecasting important for these reasons: extreme weather events (e.g., hurricanes, rain- and snow-storms) often create dire situations (e.g., floods, landslides, and wildfires) causing severe economic losses and casualties. As global warming continues, the
 frequency and intensity of extreme weather events are likely to increase in many regions (https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2022GL097904) 
@@ -114,33 +114,39 @@ best_rf = rand_search.best_estimator_
 print('Best hyperparameters:',  rand_search.best_params_)
 ```
 
-This is how the method was developed.
-
 ## Results
 
-After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy. The accuracy ~75.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs. 
+After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy by comparing the models predictions to observations from the test set. The accuracy was about 75.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs (Figure 4). Finally, I used the sklearn confusion matrix module to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
 
 ![](assets/IMG/results.png){: width="1000" }
 
 *Figure 4: Feature Importances for determining Afternoon Precipitation Events.*
 
-Figure X shows... [description of Figure X].
+![](assets/IMG/confusion_matrix.png){: width="1000" }
+
+*Figure 5: Feature Importances for determining Afternoon Precipitation Events.*
 
 ## Discussion
 
-From Figure 4, one can see that the most highly ranked feature in descending order is: temperature, dewpoint, pressure and fractional water index. While there is clearly a descending order or importance for these features, they are all relatively ranked around the same importance (ranging from 0.27 - 0.23).      
+From Figure 4, one can see that the most highly ranked feature in descending order is: temperature, dewpoint, pressure and fractional water index. While there is clearly a descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.27 - 0.23). Additionally, the confusion matrix shows 360 True negative values, 76 False negative values, 19 True positive values and 46 False positive values.   
 
 ## Conclusion
 
-Here is a brief summary. From this work, the following conclusions can be made:
+From this work, the following conclusions can be made:
 
-There is no feature that stands out as being particularly determining of APEs. Thus it's possible that each of these features work in concert with one another and have equal importance in determining afternoon rainfall. Additionally, noteably, fractional water index is similarly ranked with the other features. A conclusion can be drawn that precipitation in the Southern Great Plains region is nearly as determined by soil moisture as surface level atmospheric conditions. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during warm season.  
+First, there is no one feature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have somewhat equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
 
-Future work involves including more features such as wind speed and relative humidity. 
+Second, the while the model performance appears to be somewhat successful around 75.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .89 and TP/TP+FN = 0.2 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). 
+
+To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2).
+
+
 
 ## References
 [[1] DALL-E 3]
 (https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/)https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/
+
+https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2 
 
 [back](./)
 
