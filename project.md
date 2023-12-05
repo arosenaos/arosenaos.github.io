@@ -118,6 +118,9 @@ This is how the method was developed.
 
 ## Results
 
+After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy. The accuracy ~75.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs. 
+
+
 Figure X shows... [description of Figure X].
 
 ## Discussion
