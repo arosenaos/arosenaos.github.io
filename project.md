@@ -49,13 +49,19 @@ pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['pre
 pdf = pdf_time_ranges[['date','APE']]
 ```
 
-Once each product was preprocessed and saved within its own dataframe, I joined all soundings, precipitation and soil moisture into one result dataframe. Since my result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions. Finally, I plotted histograms and box plots of each feature in order to get a sense of the distributions of these variables.     
+Once each product was preprocessed and saved within its own dataframe, I joined all soundings, precipitation and soil moisture into one result dataframe. Since my result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions. Finally, I plotted histograms, box plots and correlation heatmap of each feature in order to get a sense of the distributions of these variables. Figures 1 and 2 show the existence of ouliers within the feature variables. However, I chose to not remove them out of a scarcity of data. Figure 3 that q and dp are highly correlated. To remove the correlations in the model, I dropped q and kept dp.      
 
 ![](assets/IMG/features_histogram.png){: width="1000" }
 
 *Figure 1: Histograms of each feature variable.*
 
 ![](assets/IMG/features_box.png){: width="1000" }
+
+*Figure 2: Boxplots of each feature variable.*
+
+![](assets/IMG/features_heatmap_box.png){: width="1000" }
+
+*Figure 3: Correlation heatmap of each feature variable.*
 
 
 ## Modelling
