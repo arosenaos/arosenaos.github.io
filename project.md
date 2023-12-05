@@ -1,18 +1,14 @@
-## My Project
-
-Predicting Southern Great Plains Afternoon Precipitation Events
-https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/ 
+## Predicting Southern Great Plains Afternoon Precipitation Events
 
 ***
 
 ## Introduction 
+Precipitation is used daily for human consumption, for agricultural needs and for industrial purposes (Chen). As such, understanding when and how much precipitation may fall in a particular region is necessary to build efficient infrastructure. Additionally, extreme weather events  involving rainfall such as hurricanes, rain and snow storms all threaten infrastructure, human lives, and may lead to profound economic losses (Chen). Additionally, as climate change may increase the likelihood of extreme events such as these in certain areas, rainfall forecasting will become even more critical in order to effectively manage of our infrastructure, economy and protect human life.  
 
-Here is a summary description of the topic. Here is the problem. This is why the problem is important. https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL097904 
+Historically, short-term rainfall prediction was primarily done using numerical weather forecasting methods. But this approach has problems related to model uncertainties, and can no longer withstand the storage and computational needs required (Chen). Machine learning models offer a useful alternative to conventional models. First, machine learning models offer a relatively inexpensive computational solution to prediction. Additionally, many models have the advantage of properly handling complex nonlinear data relationships from historical data (Mao). Since precipitation is an nonlinear process, a machine learning model is a good choice for prediction.  
 
-- Rainfall forecasting important for these reasons: extreme weather events (e.g., hurricanes, rain- and snow-storms) often create dire situations (e.g., floods, landslides, and wildfires) causing severe economic losses and casualties. As global warming continues, the
-frequency and intensity of extreme weather events are likely to increase in many regions (https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2022GL097904) 
-  
-- Machine learning approach important for these reasons: existing models use complex statistical models that are often too costly, both computationally and budgetary, or are not applied to downstream applications (https://www.sciencedirect.com/science/article/pii/S266682702100102X)
+The U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) site contains  
+
   
 - SGP hot spot for land-atmosphere interactions: Numerous studies have addressed the effect of soil moisture on
 subsequent rainfall, yet consensus remains elusive (https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2018GL078598) 
@@ -147,6 +143,10 @@ To improve the accuracy of this model, future work involves including more commo
 (https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/)https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/
 
 https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2 
+
+https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL097904 
+
+https://journals.ametsoc.org/view/journals/wefo/35/6/waf-d-20-0080.1.xml
 
 [back](./)
 
