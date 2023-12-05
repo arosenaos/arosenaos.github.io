@@ -120,6 +120,9 @@ This is how the method was developed.
 
 After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy. The accuracy ~75.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs. 
 
+![](assets/IMG/results.png){: width="1000" }
+
+*Figure 4: Feature Importances for determining Afternoon Precipitation Events.*
 
 Figure X shows... [description of Figure X].
 
