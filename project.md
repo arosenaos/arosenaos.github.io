@@ -2,6 +2,7 @@
 
 ***
 
+
 ## Introduction 
 Precipitation is a vital resource for daily human consumption, agricultural needs and for industrial applications (Chen). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen). Given the potential amplification of extreme events due to climate change in some places, accurate rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and protecting human life.  
 
@@ -129,18 +130,18 @@ Given the models lack of robustness, the following conclusions must be understoo
 To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2).
 
 ## References
-[[1] DALL-E 3]
-(https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/)https://www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/
 
-https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2 
+Chen, Guoxing, and Wei‐Chyung Wang. “Short‐term precipitation prediction for contiguous United States using deep learning.” Geophysical Research Letters, vol. 49, no. 8, 2022, https://doi.org/10.1029/2022gl097904. 
 
-https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL097904 
+Kuligowski, Robert J., and Ana P. Barros. “Experiments in short-term precipitation forecasting using artificial neural networks.” Monthly Weather Review, vol. 126, no. 2, 1998, pp. 470–482, https://doi.org/10.1175/1520-0493(1998)126&amp;lt;0470:eistpf&amp;gt;2.0.co;2. 
 
-https://journals.ametsoc.org/view/journals/wefo/35/6/waf-d-20-0080.1.xml
+Mao, Yiwen, and Asgeir Sorteberg. “Improving radar-based precipitation nowcasts with machine learning using an approach based on random forest.” Weather and Forecasting, vol. 35, no. 6, 2020, pp. 2461–2478, https://doi.org/10.1175/waf-d-20-0080.1. 
 
-https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2018GL078598 
+“Rainfall Prediction Using Machine Learning - Python.” GeeksforGeeks, GeeksforGeeks, 5 June 2023, www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/. 
 
-https://egusphere.copernicus.org/preprints/2023/egusphere-2023-1897/egusphere-2023-1897.pdf 
+Wang, Gaoyun, et al. Influence of Lower Tropospheric Moisture on Local Soil Moisture-Precipitation Feedback over the U.S. Southern Great Plains, 2023, https://doi.org/10.5194/egusphere-2023-1897. 
+
+Welty, J., and X. Zeng. “Does soil moisture affect warm season precipitation over the southern Great Plains?” Geophysical Research Letters, vol. 45, no. 15, 2018, pp. 7866–7873, https://doi.org/10.1029/2018gl078598. 
 
 [back](./)
 
