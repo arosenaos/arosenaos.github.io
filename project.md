@@ -1,4 +1,5 @@
-## Predicting Southern Great Plains Afternoon Precipitation Events ##
+
+## Predicting Southern Great Plains Afternoon Precipitation Events
 
 ***
 
@@ -44,9 +45,9 @@ pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['pre
 pdf = pdf_time_ranges[['date','APE']]
 ```
 
-Finally, I joined all soundings, precipitation and soil moisture data into a single dataframe. Since this result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions (ie the first observation in each array since the radiosondes began taking measurements at ground level). 
+Finally, I joined all soundings, precipitation and soil moisture data into a single dataframe. Since this result dataframe still contained arrays of atmospheric variables from the soundings, I extracted only the surface conditions (i.e. the first observation in each array since the radiosondes began taking measurements at ground level). 
 
-Figures 1,2 and 3 below provide helpful visualizations of the characteristics of each feature variable used within this study. Figure 1 displays the distributions of each feature: the atmospheric features (pressure, temperature and dewpoint) were all almost normally distributed, while fractional water index was not. Figure 2 shows the existence of outliers for all atmospheric features. Figure 3 shows no significant correlations between any features and consequently, all features listed remained within the model.       
+Figures 1,2 and 3 below provide helpful visualizations of the characteristics of each feature variable used within this study. Figure 1 displays the distributions of each feature: the atmospheric features (pressure, temperature and dewpoint) were all somewhat normally distributed with slight left-skew. In contrast, the fractional water index shows a multimodel distribution. Boxplots of each feature in Figure 2 shows the existence of outliers for all atmospheric features. Figure 3 shows no significant correlations between any two features and consequently, all features listed remained within the model.       
 
 ![](assets/IMG/features_histogram.png){: width="1000" }
 
@@ -63,9 +64,9 @@ Figures 1,2 and 3 below provide helpful visualizations of the characteristics of
 
 ## Modelling
 
-In order to predict an afternoon precipitation event from morning land-surface and atmospheric conditions, I used a RandomForestClassifier from the Python SciPy package. This model was deemed most appropriate for this dataset for several reasons. First, the target variable was labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is less sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in figure 2), this model could appropriately handle these inputs.    
+A random forest model (RandomForestClassifier() within the sklearn Python package) was deemed the most appropriate machine learning model to use for the objectives in this study. This model was selected for several seasons. First, the target variable was already labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is not particularly sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in Figure 2), this model could appropriately handle the underlying data.      
 
-After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler) because it was much more common that an APE did not occur (False case) than an APE did occur (True case). This function resamples the training data so that the RandomForestClassifier runs on training data that is balanced in True and False cases. 
+After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler). Random sampling is often used for imbalanced datasets -- since it was much more common that an APE did not occur (False case) than an APE did occur (True case). This function resamples the training data so that the RandomForestClassifier runs on on training data that is balanced in True and False cases. 
 
 ```python
 features = sfc_df.drop('ape', axis=1)
@@ -105,7 +106,7 @@ print('Best hyperparameters:',  rand_search.best_params_)
 
 ## Results
 
-After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy by comparing the models predictions to observations from the test set. The accuracy was about 77.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs (Figure 4). Finally, I used the sklearn confusion matrix module to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
+After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy by comparing the models predictions to observations from the test set. The accuracy was about 77.6%. Next, I calculated feature importances to identify the order of importance for features in determining an APE (Figure 4). Finally, I plotted a confusion matrix to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
 
 ![](assets/IMG/results.png){: width="1000" }
 
@@ -117,32 +118,27 @@ After establishing the best random forest classifier determined by the optimum h
 
 ## Discussion
 
-From Figure 4, one can see that the most highly ranked feature in descending order is: temperature, dewpoint, pressure and fractional water index. While there is clearly a descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.26 - 0.24). Additionally, the confusion matrix shows 344 True negative values, 73 False negative values, 14 True positive values and 30 False positive values.   
+From Figure 4, one can see that the ranking of features in descending order is: temperature, dewpoint, pressure and fractional water index. While there is a slight descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.26 - 0.24). Additionally, the confusion matrix shows 344 True negative values, 73 False negative values, 14 True positive values and 30 False positive values.   
 
 ## Conclusion
 
 From this work, the following conclusions can be made:
 
-First, while the model performance appears to be somewhat successful around 77.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .92 and TP/TP+FN = 0.16 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). 
+First, while the model performance appears to be somewhat successful around 77.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .92 and TP/TP+FN = 0.16 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). Given the models' lack of robustness, the following conclusions must be understood under this context.
 
-Given the models lack of robustness, the following conclusions must be understood under this context. Despite this, one can see there is no one feature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have somewhat equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
+One can see there is no single eature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have relatively equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
 
-To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2).
+To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (Kuligowski et al., 2022).
 
 ## References
 
 Chen, Guoxing, and Wei‐Chyung Wang. “Short‐term precipitation prediction for contiguous United States using deep learning.” Geophysical Research Letters, vol. 49, no. 8, 2022, https://doi.org/10.1029/2022gl097904. 
-
+Harris, Lucy, et al. “A generative deep learning approach to stochastic downscaling of precipitation forecasts.” Journal of Advances in Modeling Earth Systems, vol. 14, no. 10, 2022, https://doi.org/10.1029/2022ms003120. 
 Kuligowski, Robert J., and Ana P. Barros. “Experiments in short-term precipitation forecasting using artificial neural networks.” Monthly Weather Review, vol. 126, no. 2, 1998, pp. 470–482, https://doi.org/10.1175/1520-0493(1998)126&amp;lt;0470:eistpf&amp;gt;2.0.co;2. 
-
 Mao, Yiwen, and Asgeir Sorteberg. “Improving radar-based precipitation nowcasts with machine learning using an approach based on random forest.” Weather and Forecasting, vol. 35, no. 6, 2020, pp. 2461–2478, https://doi.org/10.1175/waf-d-20-0080.1. 
-
-Myoung, B. and Nielsen-Gammon, J. W.: The convective instability pathway to warm season drought in Texas. Part I: The role of convective inhibition and its modulation by soil moisture, J Clim, https://doi.org/10.1175/2010JCLI2946.1, 2010.
-
 “Rainfall Prediction Using Machine Learning - Python.” GeeksforGeeks, GeeksforGeeks, 5 June 2023, www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/. 
-
+Schultz, M. G., et al. “Can deep learning beat numerical weather prediction?” Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences, vol. 379, no. 2194, 2021, p. 20200097, https://doi.org/10.1098/rsta.2020.0097. 
 Wang, Gaoyun, et al. Influence of Lower Tropospheric Moisture on Local Soil Moisture-Precipitation Feedback over the U.S. Southern Great Plains, 2023, https://doi.org/10.5194/egusphere-2023-1897. 
-
 Welty, J., and X. Zeng. “Does soil moisture affect warm season precipitation over the southern Great Plains?” Geophysical Research Letters, vol. 45, no. 15, 2018, pp. 7866–7873, https://doi.org/10.1029/2018gl078598. 
 
 [back](./)
