@@ -1,4 +1,4 @@
-## Predicting Southern Great Plains Afternoon Precipitation Events
+## 
 
 ***
 
@@ -14,10 +14,7 @@ The Southern Great Plains (SGP) region of the United States is a location strong
 2) Calculate the relative importance of soil moisture vs. surface atmospheric properties in predicting APEs.  
 
 ## Data
-
-Here is an overview of the dataset, how it was obtained and the preprocessing steps taken, with some plots!
-
-- I used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) central facility (CF) and the region within a 50-km radius of the CF for the warm season months (May - September) within the period of 2001-2019. The data is publically available at this website: https://www.arm.gov/data/. 
+This study used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) central facility (CF) and the region within a 50-km radius of the CF for the warm season months (May - September) within the period of 2001-2019. The data is publically available at this website: https://www.arm.gov/data/. 
 
 1) Product 1: SONDEWNPN
 Description: Radiosonde balloon observations to obtain atmospheric surface variables. The variables of interest in this study were temperature, humidity, pressure and dewpoint. All profiles used in this study were measured at 11:30 LST. This time was selected because it best represents the preconditions of afternoon convection. 
@@ -27,7 +24,6 @@ Description: Soil moisture measured by soil moisture sensors. The variable of in
 
 3) Product 3: Arkansas-Red Basin River Forecast Center (ABRFC)
 Description: hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998)
-
 
 The preprocessing steps involved filtering each product such that I only extracted warm season (May - September) days between 2001-2019. I also colocated each product so that the soundings, precipitation and soil moisture files all exist within a 50km range of the ARM SGP Central Facility site. For every file in each product, I replaced missing data with NAN values and filtered all files such that I only kept the files that did not contain an excessive amount of missing information. For the precipitation product, I calculated an "afternoon precipitation event" (APE) as days in which afternoon precipitation was i) greater than morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning. Below displays the code that calculated APEs:
 
@@ -60,11 +56,7 @@ Once each product was preprocessed and saved within its own dataframe, I joined 
 
 ## Modelling
 
-Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
-
 In order to predict an afternoon precipitation event from morning land-surface and atmospheric conditions, I used a RandomForestClassifier from the Python SciPy package. This model was deemed most appropriate for this dataset for several reasons. First, the target variable was labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is less sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in figure 2), this model could appropriately handle these inputs.    
-
-The model might involve optimizing some quantity. You can include snippets of code if it is helpful to explain things.
 
 After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler) because it was much more common that an APE did not occur (False case) than an APE did occur (True case). This function resamples the training data so that the RandomForestClassifier runs on training data that is balanced in True and False cases. 
 
@@ -124,13 +116,11 @@ From Figure 4, one can see that the most highly ranked feature in descending ord
 
 From this work, the following conclusions can be made:
 
-First, there is no one feature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have somewhat equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
+First, while the model performance appears to be somewhat successful around 75.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .89 and TP/TP+FN = 0.2 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). 
 
-Second, the while the model performance appears to be somewhat successful around 75.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .89 and TP/TP+FN = 0.2 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). 
+Given the models lack of robustness, the following conclusions must be understood under this context. Despite this, one can see there is no one feature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have somewhat equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
 
 To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_eistpf_2.0.co_2.xml?tab_body=fulltext-display#s2).
-
-
 
 ## References
 [[1] DALL-E 3]
