@@ -1,5 +1,5 @@
 
-# Random Forest Classification of Southern Great Plains Afternoon Precipitation Events
+** Random Forest Classification of Southern Great Plains Afternoon Precipitation Events **
 
 ## Introduction 
 Precipitation is a vital resource for daily human consumption, agricultural needs and for industrial applications (Chen et al., 2022). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen et al., 2022). Given the potential amplification of extreme events due to climate change in some places, accurate rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and protecting human life.  
