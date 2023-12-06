@@ -1,5 +1,5 @@
 ## Predicting Southern Great Plains Afternoon Precipitation Events
-***
+
 
 ## Introduction 
 Precipitation is used daily for human consumption, for agricultural needs and for industrial purposes (Chen). As such, understanding when and how much precipitation may fall in a particular region is necessary to build efficient infrastructure. Additionally, extreme weather events  involving rainfall such as hurricanes, rain and snow storms all threaten infrastructure, human lives, and may lead to profound economic losses (Chen). Additionally, as climate change may increase the likelihood of extreme events such as these in certain areas, rainfall forecasting will become even more critical in order to effectively manage of our infrastructure, economy and protect human life.  
