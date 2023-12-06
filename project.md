@@ -1,5 +1,4 @@
-## 
-Predicting Southern Great Plains Afternoon Precipitation Events
+## Predicting Southern Great Plains Afternoon Precipitation Events
 ***
 
 ## Introduction 
@@ -45,7 +44,7 @@ Once each product was preprocessed and saved within its own dataframe, I joined 
 
 *Figure 1: Histograms of each feature variable.*
 
-![](assets/IMG/features_box.png){: width="1000" }
+![](assets/IMG/features_boxplot.png){: width="1000" }
 
 *Figure 2: Boxplots of each feature variable.*
 
@@ -98,7 +97,7 @@ print('Best hyperparameters:',  rand_search.best_params_)
 
 ## Results
 
-After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy by comparing the models predictions to observations from the test set. The accuracy was about 75.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs (Figure 4). Finally, I used the sklearn confusion matrix module to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
+After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy by comparing the models predictions to observations from the test set. The accuracy was about 77.6%. Next, I leveraged the feature_importances function to identify the ranking of feature importance for APEs (Figure 4). Finally, I used the sklearn confusion matrix module to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
 
 ![](assets/IMG/results.png){: width="1000" }
 
@@ -110,13 +109,13 @@ After establishing the best random forest classifier determined by the optimum h
 
 ## Discussion
 
-From Figure 4, one can see that the most highly ranked feature in descending order is: temperature, dewpoint, pressure and fractional water index. While there is clearly a descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.27 - 0.23). Additionally, the confusion matrix shows 360 True negative values, 76 False negative values, 19 True positive values and 46 False positive values.   
+From Figure 4, one can see that the most highly ranked feature in descending order is: temperature, dewpoint, pressure and fractional water index. While there is clearly a descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.26 - 0.24). Additionally, the confusion matrix shows 344 True negative values, 73 False negative values, 14 True positive values and 30 False positive values.   
 
 ## Conclusion
 
 From this work, the following conclusions can be made:
 
-First, while the model performance appears to be somewhat successful around 75.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .89 and TP/TP+FN = 0.2 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). 
+First, while the model performance appears to be somewhat successful around 77.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .92 and TP/TP+FN = 0.16 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). 
 
 Given the models lack of robustness, the following conclusions must be understood under this context. Despite this, one can see there is no one feature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have somewhat equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
 
