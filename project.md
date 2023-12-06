@@ -5,28 +5,22 @@
 ## Introduction 
 Precipitation is used daily for human consumption, for agricultural needs and for industrial purposes (Chen). As such, understanding when and how much precipitation may fall in a particular region is necessary to build efficient infrastructure. Additionally, extreme weather events  involving rainfall such as hurricanes, rain and snow storms all threaten infrastructure, human lives, and may lead to profound economic losses (Chen). Additionally, as climate change may increase the likelihood of extreme events such as these in certain areas, rainfall forecasting will become even more critical in order to effectively manage of our infrastructure, economy and protect human life.  
 
-Historically, short-term rainfall prediction was primarily done using numerical weather forecasting methods. But this approach has problems related to model uncertainties, and can no longer withstand the storage and computational needs required (Chen). Machine learning models offer a useful alternative to conventional models. First, machine learning models offer a relatively inexpensive computational solution to prediction. Additionally, many models have the advantage of properly handling complex nonlinear data relationships from historical data (Mao). Since precipitation is an nonlinear process, a machine learning model is a good choice for prediction.  
+Historically, short-term rainfall prediction was primarily done using numerical weather forecasting methods. But this approach has problems related to model uncertainties, and can no longer withstand the storage and computational needs required (Chen). Machine learning models offer a useful alternative to conventional models. First, machine learning models offer a relatively inexpensive computational solution to prediction. Additionally, many models have the advantage of properly handling complex nonlinear data relationships from historical data (Mao). Since precipitation is an nonlinear process, a machine learning model is a good choice for prediction.
 
-The U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) site contains  
+The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon, 2010). However, is not well understood the degree to which precipitation is determined by land surface as compared to atmospheric properties (Welty). In this study, I calculate the relative importance of land-surface versus atmospheric features in dictating afternoon precipitation events in the SGP. To this end, this study aims to accomplish these goals:
 
-  
-- SGP hot spot for land-atmosphere interactions: Numerous studies have addressed the effect of soil moisture on
-subsequent rainfall, yet consensus remains elusive (https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2018GL078598) 
+1) Determine the accuracy of a random forest classifier for predicting afternoon precipitation events (APEs) based on late morning atmospheric and soil moisture conditions.
 
-There is some dataset that we can use to help solve this problem. This allows a machine learning approach. This is how I will solve the problem using supervised/unsupervised/reinforcement/etc. machine learning.
-
-- 
-
-We did this to solve the problem. We concluded that...
+2) Calculate the relative importance of soil moisture vs. surface atmospheric properties in predicting APEs.  
 
 ## Data
 
 Here is an overview of the dataset, how it was obtained and the preprocessing steps taken, with some plots!
 
-- I used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) central facility (CF) and the region within a 50-km radius of the CF for the period of 2001-2019. The data is publically available at this website: https://www.arm.gov/data/. 
+- I used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) central facility (CF) and the region within a 50-km radius of the CF for the warm season months (May - September) within the period of 2001-2019. The data is publically available at this website: https://www.arm.gov/data/. 
 
 1) Product 1: SONDEWNPN
-Description: Radiosonde balloon observations to obtain atmospheric surface variables. The variables of interest in this study were temperature, humidity, pressure and dewpoint.
+Description: Radiosonde balloon observations to obtain atmospheric surface variables. The variables of interest in this study were temperature, humidity, pressure and dewpoint. All profiles used in this study were measured at 11:30 LST. This time was selected because it best represents the preconditions of afternoon convection. 
 
 2) Product 2: Oklahoma Mesonet Soil Moisture (OKMSOIL)
 Description: Soil moisture measured by soil moisture sensors. The variable of interest in this study was fractional water index (FWI).
@@ -147,6 +141,8 @@ https://journals.ametsoc.org/view/journals/mwre/126/2/1520-0493_1998_126_0470_ei
 https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL097904 
 
 https://journals.ametsoc.org/view/journals/wefo/35/6/waf-d-20-0080.1.xml
+
+https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2018GL078598 
 
 [back](./)
 
