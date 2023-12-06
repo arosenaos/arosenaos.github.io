@@ -3,29 +3,33 @@
 ***
 
 ## Introduction 
-Precipitation is used daily for human consumption, for agricultural needs and for industrial purposes (Chen). As such, understanding when and how much precipitation may fall in a particular region is necessary to build efficient infrastructure. Additionally, extreme weather events  involving rainfall such as hurricanes, rain and snow storms all threaten infrastructure, human lives, and may lead to profound economic losses (Chen). Additionally, as climate change may increase the likelihood of extreme events such as these in certain areas, rainfall forecasting will become even more critical in order to effectively manage of our infrastructure, economy and protect human life.  
+Precipitation is a vital resource for daily human consumption, agricultural needs and for industrial applications (Chen). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen). Given the potential amplification of extreme events due to climate change in some places, accurate rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and protecting human life.  
 
-Historically, short-term rainfall prediction was primarily done using numerical weather forecasting methods. But this approach has problems related to model uncertainties, and can no longer withstand the storage and computational needs required (Chen). Machine learning models offer a useful alternative to conventional models. First, machine learning models offer a relatively inexpensive computational solution to prediction. Additionally, many models have the advantage of properly handling complex nonlinear data relationships from historical data (Mao). Since precipitation is an nonlinear process, a machine learning model is a good choice for prediction.
+Traditionally, short-term rainfall predictions have relied upon numerical weather forecasting methods despite challenges with this approach, such as model uncertainties and extreme computational demands (Chen). Machine learning models are a useful alternative to conventional models for a few reasons. First, machine learning models offer a relatively inexpensive computational solution to prediction. Second, many models have the advantage of properly handling complex nonlinear relationships from historical data (Mao). Given the inherently nonlinear nature of precipitation processes, machine learning models present an opportunity to improve predictive precipitation capabilities. 
 
-The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon, 2010). However, is not well understood the degree to which precipitation is determined by land surface as compared to atmospheric properties (Welty). In this study, I calculate the relative importance of land-surface versus atmospheric features in dictating afternoon precipitation events in the SGP. To this end, this study aims to accomplish these goals:
+The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon, 2010). However, the extent to which precipitation in this region is influenced by land surface characteristics in comparison to atmospheric properties is not well understood (Welty). This study seeks to measure the relative importance of land-surface versus atmospheric features in dictating the presence afternoon precipitation in the SGP. Specifically, this study is designed to:
 
-1) Determine the accuracy of a random forest classifier for predicting afternoon precipitation events (APEs) based on late morning atmospheric and soil moisture conditions.
+1) Evalulate the predictive accuracy of a random forest classifier for predicting afternoon precipitation events (APEs) based on late morning atmospheric and soil moisture conditions.
 
-2) Calculate the relative importance of soil moisture vs. surface atmospheric properties in predicting APEs.  
+2) Quantify the relative importance of soil moisture versus surface atmospheric properties in the prediction of APEs.  
 
 ## Data
-This study used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) central facility (CF) and the region within a 50-km radius of the CF for the warm season months (May - September) within the period of 2001-2019. The data is publically available at this website: https://www.arm.gov/data/. 
+This study used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) Central Facility (CF). The study region encompasses a 50-kilometer radius centered around the CF site. All products were filtered for the temporal range of 2001-2019 warm season months (May - September). The data is publically available at this website: https://www.arm.gov/data/. 
 
 1) Product 1: SONDEWNPN
-Description: Radiosonde balloon observations to obtain atmospheric surface variables. The variables of interest in this study were temperature, humidity, pressure and dewpoint. All profiles used in this study were measured at 11:30 LST. This time was selected because it best represents the preconditions of afternoon convection. 
+Description: Radiosonde balloon observations. Surface temperature, humidity, pressure and dewpoint were extracted for every day in the specified temporal range. All observations used in this study were measured at 11:30 LST. This time was selected because it best represents the preconditions of afternoon convection (Wang). 
 
 2) Product 2: Oklahoma Mesonet Soil Moisture (OKMSOIL)
-Description: Soil moisture measured by soil moisture sensors. The variable of interest in this study was fractional water index (FWI).
+Description: Soil moisture observations measured by surface soil moisture sensors. The variable of interest in this study was fractional water index (FWI), which ranges from 0 for very dry soil to 1 for saturated soil (Schneider et al., 2003). 
 
 3) Product 3: Arkansas-Red Basin River Forecast Center (ABRFC)
-Description: hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998)
+Description: Hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998).
 
-The preprocessing steps involved filtering each product such that I only extracted warm season (May - September) days between 2001-2019. I also colocated each product so that the soundings, precipitation and soil moisture files all exist within a 50km range of the ARM SGP Central Facility site. For every file in each product, I replaced missing data with NAN values and filtered all files such that I only kept the files that did not contain an excessive amount of missing information. For the precipitation product, I calculated an "afternoon precipitation event" (APE) as days in which afternoon precipitation was i) greater than morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning. Below displays the code that calculated APEs:
+The preprocessing steps involved filtering each product such that only warm season (May - September) days between 2001-2019 were extracted. Then, colocation between the soundings, precipitation, and soil moisture files ensured that all data used exist within a 50-kilometer radius around the ARM SGP Central Facility site.
+
+Once all products were temporally and geographically filtered, missing/incomplete/physically unrealistic data were filled with NAN values. Then, all files were filtered such that only the files that did not contain an excessive amount of missing information remained. 
+
+For the precipitation product, APEs were calculated as days with precipitation that satisfied the following criteria: i) afternoon precipitation was greater than both morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning (Wang). Below displays the coding process which calculates an APE: 
 
 ```python
 ##precip_6_13 = total morning precipitation (between hours 6-13 LST)
@@ -39,7 +43,9 @@ pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['pre
 pdf = pdf_time_ranges[['date','APE']]
 ```
 
-Once each product was preprocessed and saved within its own dataframe, I joined all soundings, precipitation and soil moisture into one result dataframe. Since my result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions. Finally, I plotted histograms, box plots and correlation heatmap of each feature in order to get a sense of the distributions of these variables. Figures 1 and 2 show the existence of ouliers within the feature variables. However, I chose to not remove them out of a scarcity of data. Figure 3 shows no significant correlations between any features and thus all features were kept in the model.      
+Finally, I joined all soundings, precipitation and soil moisture data into a single dataframe. Since this result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions (ie the first observation in each array since the radiosondes began taking measurements at ground level). 
+
+Figures 1,2 and 3 below provide helpful visualizations of the characteristics of each feature variable used within this study. Figure 1 displays the distributions of each feature: the atmospheric features (pressure, temperature and dewpoint) were all almost normally distributed, while fractional water index was not. Figure 2 shows the existence of outliers for all atmospheric features. Figure 3 shows no significant correlations between any features and consequently, all features listed remained within the model.       
 
 ![](assets/IMG/features_histogram.png){: width="1000" }
 
@@ -133,6 +139,8 @@ https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL097904
 https://journals.ametsoc.org/view/journals/wefo/35/6/waf-d-20-0080.1.xml
 
 https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2018GL078598 
+
+https://egusphere.copernicus.org/preprints/2023/egusphere-2023-1897/egusphere-2023-1897.pdf 
 
 [back](./)
 
