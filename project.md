@@ -49,7 +49,7 @@ Once each product was preprocessed and saved within its own dataframe, I joined 
 
 *Figure 2: Boxplots of each feature variable.*
 
-![](assets/IMG/features_heatmap.png){: width="500" }
+![](assets/IMG/features_heatmap.png){: width="1000" }
 
 *Figure 3: Correlation heatmap of each feature variable.*
 
