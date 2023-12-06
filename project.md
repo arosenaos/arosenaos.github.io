@@ -1,5 +1,5 @@
 ## 
-
+Predicting Southern Great Plains Afternoon Precipitation Events
 ***
 
 ## Introduction 
@@ -39,7 +39,7 @@ pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['pre
 pdf = pdf_time_ranges[['date','APE']]
 ```
 
-Once each product was preprocessed and saved within its own dataframe, I joined all soundings, precipitation and soil moisture into one result dataframe. Since my result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions. Finally, I plotted histograms, box plots and correlation heatmap of each feature in order to get a sense of the distributions of these variables. Figures 1 and 2 show the existence of ouliers within the feature variables. However, I chose to not remove them out of a scarcity of data. Figure 3 that q and dp are highly correlated. To remove the correlations in the model, I dropped q and kept dp.      
+Once each product was preprocessed and saved within its own dataframe, I joined all soundings, precipitation and soil moisture into one result dataframe. Since my result dataframe still contained arrays of atmospheric variables from the soundings (variables measured at interpolated pressure levels up to ~200hpa in the atmosphere), I extracted only the surface conditions. Finally, I plotted histograms, box plots and correlation heatmap of each feature in order to get a sense of the distributions of these variables. Figures 1 and 2 show the existence of ouliers within the feature variables. However, I chose to not remove them out of a scarcity of data. Figure 3 shows no significant correlations between any features and thus all features were kept in the model.      
 
 ![](assets/IMG/features_histogram.png){: width="1000" }
 
