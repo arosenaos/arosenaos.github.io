@@ -1,14 +1,14 @@
-## Predicting Southern Great Plains Afternoon Precipitation Events
+## Predicting Southern Great Plains Afternoon Precipitation Events ##
 
 ***
 
 
 ## Introduction 
-Precipitation is a vital resource for daily human consumption, agricultural needs and for industrial applications (Chen). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen). Given the potential amplification of extreme events due to climate change in some places, accurate rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and protecting human life.  
+Precipitation is a vital resource for daily human consumption, agricultural needs and for industrial applications (Chen et al., 2022). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen et al., 2022). Given the potential amplification of extreme events due to climate change in some places, accurate rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and protecting human life.  
 
-Traditionally, short-term rainfall predictions have relied upon numerical weather forecasting methods despite challenges with this approach, such as model uncertainties and extreme computational demands (Chen). Machine learning models are a useful alternative to conventional models for a few reasons. First, machine learning models offer a relatively inexpensive computational solution to prediction. Second, many models have the advantage of properly handling complex nonlinear relationships from historical data (Mao). Given the inherently nonlinear nature of precipitation processes, machine learning models present an opportunity to improve predictive precipitation capabilities. 
+Traditionally, short-term rainfall predictions have relied upon numerical weather forecasting methods despite challenges with this approach, such as model uncertainties and extreme computational demands (Chen et al., 2022). Machine learning models are a useful alternative to conventional models for a few reasons. First, machine learning models offer a relatively inexpensive computational solution to prediction. Second, many models have the advantage of properly handling complex nonlinear relationships from historical data (Mao et al., 2020). Given the inherently nonlinear nature of precipitation processes, machine learning models present an opportunity to improve predictive precipitation capabilities. 
 
-The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon, 2010). However, the extent to which precipitation in this region is influenced by land surface characteristics in comparison to atmospheric properties is not well understood (Welty). This study seeks to measure the relative importance of land-surface versus atmospheric features in dictating the presence afternoon precipitation in the SGP. Specifically, this study is designed to:
+The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon et al., 2010). However, the extent to which precipitation in this region is influenced by land surface characteristics in comparison to atmospheric properties is not well understood (Welty et al., 2018). This study seeks to measure the relative importance of land-surface versus atmospheric features in dictating the presence afternoon precipitation in the SGP. Specifically, this study is designed to:
 
 1) Evalulate the predictive accuracy of a random forest classifier for predicting afternoon precipitation events (APEs) based on late morning atmospheric and soil moisture conditions.
 
@@ -136,6 +136,8 @@ Chen, Guoxing, and Wei‐Chyung Wang. “Short‐term precipitation prediction f
 Kuligowski, Robert J., and Ana P. Barros. “Experiments in short-term precipitation forecasting using artificial neural networks.” Monthly Weather Review, vol. 126, no. 2, 1998, pp. 470–482, https://doi.org/10.1175/1520-0493(1998)126&amp;lt;0470:eistpf&amp;gt;2.0.co;2. 
 
 Mao, Yiwen, and Asgeir Sorteberg. “Improving radar-based precipitation nowcasts with machine learning using an approach based on random forest.” Weather and Forecasting, vol. 35, no. 6, 2020, pp. 2461–2478, https://doi.org/10.1175/waf-d-20-0080.1. 
+
+Myoung, B. and Nielsen-Gammon, J. W.: The convective instability pathway to warm season drought in Texas. Part I: The role of convective inhibition and its modulation by soil moisture, J Clim, https://doi.org/10.1175/2010JCLI2946.1, 2010.
 
 “Rainfall Prediction Using Machine Learning - Python.” GeeksforGeeks, GeeksforGeeks, 5 June 2023, www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/. 
 
