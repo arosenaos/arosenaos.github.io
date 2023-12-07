@@ -1,9 +1,5 @@
 **Random Forest Classification of Southern Great Plains Afternoon Precipitation Events**
 
-
-
-
-
 ## Introduction 
 Precipitation is a vital resource for daily human consumption, agricultural needs and industrial applications (Chen et al., 2022). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen et al., 2022). Given the potential amplification of extreme events due to climate change in some places, accurate short-term and long-term rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and the protection of human life.  
 
@@ -31,7 +27,7 @@ Description: Hourly gridded precipitation based on WSR-88D Nexrad radar precipit
 
 The preprocessing steps involved filtering each product such that only warm season (May - September) days between 2001-2019 were extracted. Then, colocation between the soundings, precipitation, and soil moisture files ensured that all measured data used belonged within a 50-kilometer radius around the ARM SGP Central Facility site. While all radiosonde files originated from the same latitude and longitude pair (36.61,-97.49), OKMSOIL fractional water index is measured at over 100 different stations scattered across the Southern Great Plains region, and ABRFC precipitation is collected by satellite and thus extends across an even larger spatial domain. In order to colocate soil moisture with the sounding profiles, a single station located closest to the ARM SGP CF site was chosen. Precipitation was colocated with soundings (and the soil moisture station) by taking an average of daily precipitation across a 0.5 degree in both the latitude and longitude directions. Figure 1 below displays the colocation process. 
 
-![](assets/IMG/download.png){: width="1000" }
+![](assets/IMG/download.png){: width="500" }
 
 *Figure 1: Colocation of sondewnpn radiosonde profiles with OKMSOIL and ABRFC products. The multicolored swath shows the ABRFC full domain and the blue patch indicates the ABRFC subdomain selected for this study*      
 
