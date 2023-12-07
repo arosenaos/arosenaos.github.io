@@ -1,17 +1,21 @@
 
 
-### Random Forest Classification of Southern Great Plains Afternoon Precipitation Events
+**Random Forest Classification of Southern Great Plains Afternoon Precipitation Events**
+
+
 
 ## Introduction 
 Precipitation is a vital resource for daily human consumption, agricultural needs and for industrial applications (Chen et al., 2022). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen et al., 2022). Given the potential amplification of extreme events due to climate change in some places, accurate rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and protecting human life.  
 
 Traditionally, short-term rainfall predictions have relied upon numerical weather forecasting methods despite challenges with this approach, such as model uncertainties and extreme computational demands (Chen et al., 2022). Machine learning models are a useful alternative to conventional models for a few reasons. First, machine learning models offer a relatively inexpensive computational solution to prediction. Second, many models have the advantage of properly handling complex nonlinear relationships from historical data (Mao et al., 2020). Given the inherently nonlinear nature of precipitation processes, machine learning models present an opportunity to improve predictive precipitation capabilities. 
 
-The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon et al., 2010). However, the extent to which precipitation in this region is influenced by land surface characteristics in comparison to atmospheric properties is not well understood (Welty et al., 2018). This study seeks to measure the relative importance of land-surface versus atmospheric features in dictating the presence afternoon precipitation in the SGP. Specifically, this study is designed to:
+The Southern Great Plains (SGP) region of the United States is a location strongly influenced by land-atmosphere interactions particularly during the warm season months (May - September) (Myoung and NielsenGammon et al., 2010). However, the extent to which precipitation is influenced by soil moisture is not well understood (Welty et al., 2018). This study seeks to measure the relative importance of land-surface versus atmospheric features in dictating the presence afternoon precipitation in the SGP. Specifically, this study is designed to:
 
-1) Evalulate the predictive accuracy of a random forest classifier for predicting afternoon precipitation events (APEs) based on late morning atmospheric and soil moisture conditions.
+**1) Evalulate the predictive accuracy of a random forest classifier for predicting afternoon precipitation events (APEs) based on late morning atmospheric and soil moisture conditions.**
 
-2) Quantify the relative importance of soil moisture versus surface atmospheric properties in the prediction of APEs.  
+**2) Quantify the relative importance of soil moisture versus surface atmospheric properties in the prediction of APEs.**  
+
+
 
 ## Data
 This study used three products from the  U.S. Department of Energy’s Atmospheric Radiation Measurement (DOE ARM) Southern Great Plain (SGP) Central Facility (CF). The study region encompasses a 50-kilometer radius centered around the CF site. All products were filtered for the temporal range of 2001-2019 warm season months (May - September). The data is publically available at this website: https://www.arm.gov/data/. 
@@ -25,7 +29,7 @@ Description: Soil moisture observations measured by surface soil moisture sensor
 3) Product 3: Arkansas-Red Basin River Forecast Center (ABRFC)
 Description: Hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998).
 
-The preprocessing steps involved filtering each product such that only warm season (May - September) days between 2001-2019 were extracted. Then, colocation between the soundings, precipitation, and soil moisture files ensured that all data used exist within a 50-kilometer radius around the ARM SGP Central Facility site.
+The preprocessing steps involved filtering each product such that only warm season (May - September) days between 2001-2019 were extracted. Then, colocation between the soundings, precipitation, and soil moisture files ensured that all data used exist within a 50-kilometer radius around the ARM SGP Central Facility site. The colocation procedure 
 
 Once all products were temporally and geographically filtered, missing/incomplete/physically unrealistic data were filled with NAN values. Then, all files were filtered such that only the files that did not contain an excessive amount of missing information remained. 
 
@@ -43,7 +47,7 @@ pdf_time_ranges['APE'] = (pdf_time_ranges['precip_14_20'] > pdf_time_ranges['pre
 pdf = pdf_time_ranges[['date','APE']]
 ```
 
-Finally, I joined all soundings, precipitation and soil moisture data into a single dataframe. Since this result dataframe still contained arrays of atmospheric variables from the soundings, I extracted only the surface conditions (i.e. the first observation in each array since the radiosondes began taking measurements at ground level). 
+Finally, I joined all soundings, precipitation and soil moisture data into a single dataframe. Since this result dataframe still contained arrays of atmospheric variables from the soundings, I extracted only the surface conditions (i.e. the first observation in each array since the radiosondes began taking measurements at ground level).  
 
 Figures 1,2 and 3 below provide helpful visualizations of the characteristics of each feature variable used within this study. Figure 1 displays the distributions of each feature: the atmospheric features (pressure, temperature and dewpoint) were all somewhat normally distributed with slight left-skew. In contrast, the fractional water index shows a multimodel distribution. Boxplots of each feature in Figure 2 shows the existence of outliers for all atmospheric features. Figure 3 shows no significant correlations between any two features and consequently, all features listed remained within the model.       
 
@@ -60,8 +64,8 @@ Figures 1,2 and 3 below provide helpful visualizations of the characteristics of
 *Figure 3: Correlation heatmap of each feature variable.*
 
 
-## Modelling
 
+## Modelling
 A random forest model (RandomForestClassifier() within the sklearn Python package) was deemed the most appropriate machine learning model to use for the objectives in this study. This model was selected for several seasons. First, the target variable was already labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is not particularly sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in Figure 2), this model could appropriately handle the underlying data.      
 
 After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler). Random sampling is often used for imbalanced datasets -- since it was much more common that an APE did not occur (False case) than an APE did occur (True case). This function resamples the training data so that the RandomForestClassifier runs on on training data that is balanced in True and False cases. 
@@ -102,9 +106,9 @@ best_rf = rand_search.best_estimator_
 print('Best hyperparameters:',  rand_search.best_params_)
 ```
 
-## Results
 
-After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the models' accuracy by comparing the models predictions to observations from the test set. The accuracy was about 77.6%. Next, I calculated feature importances to identify the order of importance for features in determining an APE (Figure 4). Finally, I plotted a confusion matrix to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
+## Results
+After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the model accuracy by comparing the model predictions to observations from the test set. The accuracy was about 77.6%. Next, I calculated feature importances to identify the order of importance for features in determining an APE (Figure 4). Finally, I plotted a confusion matrix to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
 
 ![](assets/IMG/results.png){: width="1000" }
 
@@ -114,12 +118,15 @@ After establishing the best random forest classifier determined by the optimum h
 
 *Figure 5: Confusion Matrix of RandomForestClassifier.*
 
+
+
 ## Discussion
 
 From Figure 4, one can see that the ranking of features in descending order is: temperature, dewpoint, pressure and fractional water index. While there is a slight descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.26 - 0.24). Additionally, the confusion matrix shows 344 True negative values, 73 False negative values, 14 True positive values and 30 False positive values.   
 
-## Conclusion
 
+
+## Conclusion
 From this work, the following conclusions can be made:
 
 First, while the model performance appears to be somewhat successful around 77.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .92 and TP/TP+FN = 0.16 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). Given the models' lack of robustness, the following conclusions must be understood under this context.
@@ -127,6 +134,8 @@ First, while the model performance appears to be somewhat successful around 77.6
 One can see there is no single eature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have relatively equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
 
 To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (Kuligowski et al., 2022).
+
+
 
 ## References
 
