@@ -63,7 +63,7 @@ Figures 2,3 and 4 below provide helpful visualizations of the characteristics of
 
 *Figure 3: Boxplots of each feature variable.*
 
-![](assets/IMG/features_heatmap.png){: width="250" }
+![](assets/IMG/features_heatmap.png){: width="500" }
 
 *Figure 4: Correlation heatmap of each feature variable.*
 
