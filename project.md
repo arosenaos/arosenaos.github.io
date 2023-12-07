@@ -33,9 +33,9 @@ The preprocessing steps involved filtering each product such that only warm seas
 
 *Figure 1: Colocation of sondewnpn radiosonde profiles with OKMSOIL and ABRFC products. The multicolored swath shows the ABRFC full domain and the blue patch indicates the ABRFC subdomain selected for this study*      
 
-Once all products were temporally and geographically filtered, missing/incomplete/physically unrealistic data were filled with NAN values. Then, all files were filtered such that only the files that did not contain an excessive amount of missing information remained. 
+Once all products were temporally and geographically colocated, missing/incomplete or physically unrealistic data were filled with NAN values. Then, all files were filtered such that only the files that did not contain an excessive amount of missing information remained within this study.  
 
-For the precipitation product, APEs were calculated as days with precipitation that satisfied the following criteria: i) afternoon precipitation was greater than both morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning (Wang). Below displays the coding process which calculates an APE: 
+For the precipitation product, APEs were calculated as days with precipitation that satisfied the following criteria: i) afternoon precipitation was greater than both morning and evening precipitation and ii) at least twice as much precipitation occurred in the afternoon than the morning (Wang). The code sample below displays how APEs were determined using a conditional statement: 
 
 ```python
 ##precip_6_13 = total morning precipitation (between hours 6-13 LST)
@@ -51,15 +51,15 @@ pdf = pdf_time_ranges[['date','APE']]
 
 Finally, I joined all soundings, precipitation and soil moisture data into a single dataframe. Since this result dataframe still contained arrays of atmospheric variables from the soundings, I extracted only the surface conditions (i.e. the first observation in each array since the radiosondes began taking measurements at ground level).  
 
-Figures 1,2 and 3 below provide helpful visualizations of the characteristics of each feature variable used within this study. Figure 1 displays the distributions of each feature: the atmospheric features (pressure, temperature and dewpoint) were all somewhat normally distributed with slight left-skew. In contrast, the fractional water index shows a multimodel distribution. Boxplots of each feature in Figure 2 shows the existence of outliers for all atmospheric features. Figure 3 shows no significant correlations between any two features and consequently, all features listed remained within the model.       
+Figures 2,3 and 4 below provide helpful visualizations of the characteristics of each feature variable used within this study. Figure 2 displays the distributions of each feature: the atmospheric features (pressure, temperature and dewpoint) were all somewhat normally distributed with slight left-skew. In contrast, the fractional water index shows a multimodel distribution. Boxplots of each feature in Figure 3 shows the existence of outliers for all atmospheric features. Figure 4 shows no significant correlations between any two features and consequently, all features listed remained within the model.       
 
 ![](assets/IMG/features_histogram.png){: width="1000" }
 
-*Figure 1: Histograms of each feature variable.*
+*Figure 2: Histograms of each feature variable.*
 
 ![](assets/IMG/features_boxplot.png){: width="1000" }
 
-*Figure 2: Boxplots of each feature variable.*
+*Figure 3: Boxplots of each feature variable.*
 
 ![](assets/IMG/features_heatmap.png){: width="1000" }
 
@@ -68,9 +68,9 @@ Figures 1,2 and 3 below provide helpful visualizations of the characteristics of
 
 
 ## Modelling
-A random forest model (RandomForestClassifier() within the sklearn Python package) was deemed the most appropriate machine learning model to use for the objectives in this study. This model was selected for several seasons. First, the target variable was already labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is not particularly sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in Figure 2), this model could appropriately handle the underlying data.      
+The random forest model, RandomForestClassifier() within the sklearn Python package, was deemed the most appropriate machine learning model to use in order to satisfy the objectives within this study. This model was selected for several seasons. First, the target variable was already labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is not particularly sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in Figure 2), this model could appropriately handle the underlying data.      
 
-After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler). Random sampling is often used for imbalanced datasets -- since it was much more common that an APE did not occur (False case) than an APE did occur (True case). This function resamples the training data so that the RandomForestClassifier runs on on training data that is balanced in True and False cases. 
+After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler). Random sampling is often used for imbalanced datasets. Imbalanced data is defined data which contains a target variable with uneven distribution of observation types. For example, since it was much more common that an APE did not occur (False case) than an APE did occur (True case), oversampling was applied to redistribute this imbalance. The RandomOversampler within the imblearn Python pack resamples the training data so that the RandomForestClassifier runs on on training data that is balanced in True and False cases. 
 
 ```python
 features = sfc_df.drop('ape', axis=1)
@@ -133,7 +133,7 @@ From this work, the following conclusions can be made:
 
 First, while the model performance appears to be somewhat successful around 77.6%, the performance is not particularly robust. Analyzing the confusion matrix clearly shows why this is this case. One can see that while the model was fairly successful in predicting the absence of APEs (True negatives vs False negatives), the model sufferred in attempting to predict the presence of APEs (True positives vs. False positives). This is easy to see when comparing the ratios of: TN/TN+FP = .92 and TP/TP+FN = 0.16 (TN = True Negative, FP = False positive, TP = True positive, FN = False negative). Given the models' lack of robustness, the following conclusions must be understood under this context.
 
-One can see there is no single eature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have relatively equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
+One can see there is no single feature that stands out as being particularly deterministic of APEs. This suggests the possibility that that each of these features work in concert with one another and have relatively equal importance in determining afternoon rainfall. Additionally, once can conclude from Figure 4 that despite the importance of fractional water index, atmospheric surface variables are still stronger determining factors for afternoon precipitation. However, it is still noteable that fractional water index is similarly ranked with the atmospheric features. Thus, a conclusion can be drawn that precipitation in the Southern Great Plains region is almost nearly as determined by soil moisture conditions as surface level atmospheric variables. This conclusion is to be expected given that the SGP is a region heavily impacted by land-surface interactions especially during the warm season months.  
 
 To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artifical neural networks. Artifical Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because while some small-scale physical processes of precipitation still are widely unknown (Kuligowski et al., 2022).
 
