@@ -138,13 +138,22 @@ To improve the accuracy of this model, future work involves including more commo
 ## References
 
 Chen, Guoxing, and Wei‐Chyung Wang. “Short‐term precipitation prediction for contiguous United States using deep learning.” Geophysical Research Letters, vol. 49, no. 8, 2022, https://doi.org/10.1029/2022gl097904. 
+
 Fulton, Richard A., et al. “The WSR-88D rainfall algorithm.” Weather and Forecasting, vol. 13, no. 2, 1998, pp. 377–395, https://doi.org/10.1175/1520-0434(1998)013&amp;lt;0377:twra&amp;gt;2.0.co;2. 
+
 Harris, Lucy, et al. “A generative deep learning approach to stochastic downscaling of precipitation forecasts.” Journal of Advances in Modeling Earth Systems, vol. 14, no. 10, 2022, https://doi.org/10.1029/2022ms003120. 
+
 Kuligowski, Robert J., and Ana P. Barros. “Experiments in short-term precipitation forecasting using artificial neural networks.” Monthly Weather Review, vol. 126, no. 2, 1998, pp. 470–482, https://doi.org/10.1175/1520-0493(1998)126&amp;lt;0470:eistpf&amp;gt;2.0.co;2. 
+
 Mao, Yiwen, and Asgeir Sorteberg. “Improving radar-based precipitation nowcasts with machine learning using an approach based on random forest.” Weather and Forecasting, vol. 35, no. 6, 2020, pp. 2461–2478, https://doi.org/10.1175/waf-d-20-0080.1. 
-“Rainfall Prediction Using Machine Learning - Python.” GeeksforGeeks, GeeksforGeeks, 5 June 2023, www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/. 
+“Rainfall Prediction Using Machine Learning - Python.” GeeksforGeeks, GeeksforGeeks, 5 June 2023, www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/.
+
 Schneider, J. M., et al. “Spatiotemporal variations in soil water: First results from the ARM SGP CART network.” Journal of Hydrometeorology, vol. 4, no. 1, 2003, pp. 106–120, https://doi.org/10.1175/1525-7541(2003)004&amp;lt;0106:sviswf&amp;gt;2.0.co;2. 
+
 Schneider, J. M., et al. “Spatiotemporal variations in soil water: First results from the ARM SGP CART network.” Journal of Hydrometeorology, vol. 4, no. 1, 2003, pp. 106–120, https://doi.org/10.1175/1525-7541(2003)004&amp;lt;0106:sviswf&amp;gt;2.0.co;2. 
+
 Schultz, M. G., et al. “Can deep learning beat numerical weather prediction?” Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences, vol. 379, no. 2194, 2021, p. 20200097, https://doi.org/10.1098/rsta.2020.0097. 
-Wang, Gaoyun, et al. Influence of Lower Tropospheric Moisture on Local Soil Moisture-Precipitation Feedback over the U.S. Southern Great Plains, 2023, https://doi.org/10.5194/egusphere-2023-1897. 
+
+Wang, Gaoyun, et al. Influence of Lower Tropospheric Moisture on Local Soil Moisture-Precipitation Feedback over the U.S. Southern Great Plains, 2023, https://doi.org/10.5194/egusphere-2023-1897.
+
 Welty, J., and X. Zeng. “Does soil moisture affect warm season precipitation over the southern Great Plains?” Geophysical Research Letters, vol. 45, no. 15, 2018, pp. 7866–7873, https://doi.org/10.1029/2018gl078598. 
