@@ -63,7 +63,7 @@ Figures 2,3 and 4 below provide helpful visualizations of the characteristics of
 
 *Figure 3: Boxplots of each feature variable.*
 
-![](assets/IMG/features_heatmap.png){: width="500" }
+![](assets/IMG/features_heatmap.png){: width="700" }
 
 *Figure 4: Correlation heatmap of each feature variable.*
 
@@ -114,11 +114,11 @@ print('Best hyperparameters:',  rand_search.best_params_)
 ## Results
 After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the model accuracy by comparing the model predictions to observations from the test set. The accuracy was about 77.6%. Next, I calculated feature importances to identify the order of importance for features in determining an APE (Figure 5). Finally, I plotted a confusion matrix to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 6). 
 
-![](assets/IMG/results.png){: width="1000" }
+![](assets/IMG/results.png){: width="500" }
 
 *Figure 5: Feature Importances for determining Afternoon Precipitation Events.*
 
-![](assets/IMG/confusion_matrix.png){: width="1000" }
+![](assets/IMG/confusion_matrix.png){: width="700" }
 
 *Figure 6: Confusion Matrix of RandomForestClassifier.*
 
