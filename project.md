@@ -2,6 +2,8 @@
 
 
 
+
+
 ## Introduction 
 Precipitation is a vital resource for daily human consumption, agricultural needs and industrial applications (Chen et al., 2022). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen et al., 2022). Given the potential amplification of extreme events due to climate change in some places, accurate short-term and long-term rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and the protection of human life.  
 
@@ -61,14 +63,14 @@ Figures 2,3 and 4 below provide helpful visualizations of the characteristics of
 
 *Figure 3: Boxplots of each feature variable.*
 
-![](assets/IMG/features_heatmap.png){: width="1000" }
+![](assets/IMG/features_heatmap.png){: width="500" }
 
-*Figure 3: Correlation heatmap of each feature variable.*
+*Figure 4: Correlation heatmap of each feature variable.*
 
 
 
 ## Modeling
-The random forest model, RandomForestClassifier() within the sklearn Python package, was deemed the most appropriate machine learning model to use in order to satisfy the objectives within this study. This model was selected for several seasons. First, the target variable was already labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is not particularly sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in Figure 2), this model could appropriately handle the underlying data.      
+The random forest model, RandomForestClassifier() within the sklearn Python package, was deemed the most appropriate machine learning model to use in order to satisfy the objectives within this study. This model was selected for several seasons. First, the target variable was already labeled which required a supervised model. The target variable also required a classification model because predictions would either fall under the True case (existence of an APE, "1") or False case (non-existence of APE, "0"). Finally, the RandomForestClassifier is not particularly sensitive to outliers since it takes the average of many decision trees. Since the features contained outliers (as seen above in Figure 3), this model could appropriately handle the underlying data.      
 
 After creating a train/test split of 80/20, it was also deemed appropriate to also use a random oversampler function (RandomOverSampler). Random sampling is often used for imbalanced datasets. Imbalanced data is defined data which contains a target variable with uneven distribution of observation types. For example, since it was much more common that an APE did not occur (False case) than an APE did occur (True case), oversampling was applied to redistribute this imbalance. The RandomOversampler within the imblearn Python pack resamples the training data so that the RandomForestClassifier runs on training data that is balanced in True and False cases. 
 
@@ -110,21 +112,21 @@ print('Best hyperparameters:',  rand_search.best_params_)
 
 
 ## Results
-After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the model accuracy by comparing the model predictions to observations from the test set. The accuracy was about 77.6%. Next, I calculated feature importances to identify the order of importance for features in determining an APE (Figure 4). Finally, I plotted a confusion matrix to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 5). 
+After establishing the best random forest classifier determined by the optimum hyperparameters, I tested the model accuracy by comparing the model predictions to observations from the test set. The accuracy was about 77.6%. Next, I calculated feature importances to identify the order of importance for features in determining an APE (Figure 5). Finally, I plotted a confusion matrix to categorize the true positive, false positive, true negative and false negative outputs of the model (Figure 6). 
 
 ![](assets/IMG/results.png){: width="1000" }
 
-*Figure 4: Feature Importances for determining Afternoon Precipitation Events.*
+*Figure 5: Feature Importances for determining Afternoon Precipitation Events.*
 
 ![](assets/IMG/confusion_matrix.png){: width="1000" }
 
-*Figure 5: Confusion Matrix of RandomForestClassifier.*
+*Figure 6: Confusion Matrix of RandomForestClassifier.*
 
 
 
 ## Discussion
 
-From Figure 4, one can see that the ranking of features in descending order is: temperature, dewpoint, pressure and fractional water index. While there is a slight descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.26 - 0.24). Additionally, the confusion matrix shows 344 True negative values, 73 False negative values, 14 True positive values and 30 False positive values.   
+From Figure 5, one can see that the ranking of features in descending order is: temperature, dewpoint, pressure and fractional water index. While there is a slight descending order (or importance) for these features, they are all relatively ranked around the same importance (ranging from 0.26 - 0.24). Additionally, the confusion matrix (Figure 6) shows 344 True negative values, 73 False negative values, 14 True positive values and 30 False positive values.   
 
 
 
@@ -137,3 +139,16 @@ One can see there is no single feature that stands out as being particularly det
 
 To improve the accuracy of this model, future work involves including more common atmospheric features to precipitation prediction. Some of these variables include: wind speed, relative humidity and solar radiation. Additionally, I intend to experiment with how the model performance changes when using the average of measurements of atmospheric variables at different height intervals in the atmosphere, as opposed to only using surface conditions. I also intend to explore and compare the difference in performance with other machine learning models, particularly artificial neural networks. Artificial Neural Networks have recently become useful in weather and climate forecasting (Chantry et al., 2021; Schultz et al., 2021). ANNs are also successful at handling non-linear relationships within data and precipitation is inherently a highly nonlinear process. Additionally, ANNs can self-learn and successfully predict without knowing prior information about the relationship between variables in a system. In this way, ANNs may be a successful model choice because some small-scale physical processes of precipitation still are widely unknown (Kuligowski et al., 2022).
 
+## References
+
+Chen, Guoxing, and Wei‐Chyung Wang. “Short‐term precipitation prediction for contiguous United States using deep learning.” Geophysical Research Letters, vol. 49, no. 8, 2022, https://doi.org/10.1029/2022gl097904. 
+Fulton, Richard A., et al. “The WSR-88D rainfall algorithm.” Weather and Forecasting, vol. 13, no. 2, 1998, pp. 377–395, https://doi.org/10.1175/1520-0434(1998)013&amp;lt;0377:twra&amp;gt;2.0.co;2. 
+Harris, Lucy, et al. “A generative deep learning approach to stochastic downscaling of precipitation forecasts.” Journal of Advances in Modeling Earth Systems, vol. 14, no. 10, 2022, https://doi.org/10.1029/2022ms003120. 
+Kuligowski, Robert J., and Ana P. Barros. “Experiments in short-term precipitation forecasting using artificial neural networks.” Monthly Weather Review, vol. 126, no. 2, 1998, pp. 470–482, https://doi.org/10.1175/1520-0493(1998)126&amp;lt;0470:eistpf&amp;gt;2.0.co;2. 
+Mao, Yiwen, and Asgeir Sorteberg. “Improving radar-based precipitation nowcasts with machine learning using an approach based on random forest.” Weather and Forecasting, vol. 35, no. 6, 2020, pp. 2461–2478, https://doi.org/10.1175/waf-d-20-0080.1. 
+“Rainfall Prediction Using Machine Learning - Python.” GeeksforGeeks, GeeksforGeeks, 5 June 2023, www.geeksforgeeks.org/rainfall-prediction-using-machine-learning-python/. 
+Schneider, J. M., et al. “Spatiotemporal variations in soil water: First results from the ARM SGP CART network.” Journal of Hydrometeorology, vol. 4, no. 1, 2003, pp. 106–120, https://doi.org/10.1175/1525-7541(2003)004&amp;lt;0106:sviswf&amp;gt;2.0.co;2. 
+Schneider, J. M., et al. “Spatiotemporal variations in soil water: First results from the ARM SGP CART network.” Journal of Hydrometeorology, vol. 4, no. 1, 2003, pp. 106–120, https://doi.org/10.1175/1525-7541(2003)004&amp;lt;0106:sviswf&amp;gt;2.0.co;2. 
+Schultz, M. G., et al. “Can deep learning beat numerical weather prediction?” Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences, vol. 379, no. 2194, 2021, p. 20200097, https://doi.org/10.1098/rsta.2020.0097. 
+Wang, Gaoyun, et al. Influence of Lower Tropospheric Moisture on Local Soil Moisture-Precipitation Feedback over the U.S. Southern Great Plains, 2023, https://doi.org/10.5194/egusphere-2023-1897. 
+Welty, J., and X. Zeng. “Does soil moisture affect warm season precipitation over the southern Great Plains?” Geophysical Research Letters, vol. 45, no. 15, 2018, pp. 7866–7873, https://doi.org/10.1029/2018gl078598. 
