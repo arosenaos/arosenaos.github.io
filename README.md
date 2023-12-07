@@ -2,6 +2,8 @@
 
 [Random Forest Classification of Southern Great Plains Afternoon Precipitation Events](https://arosenaos.github.io/project.html)
 
+[See my code here!](https://arosenaos.github.io/assets/ml_project.py)
+
 Precipitation is a vital resource for urban water facilities, agricultural needs and industrial applications (Chen et al., 2022). Consequently, predicting the timing and amount of precipitation in specific regions is crucial for the development and maintenance of efficient infrastructure. Additionally, extreme weather events involving precipitation, such as hurricanes, rain and snow storms pose significant threats to infrastructure, human lives, and may lead to profound economic losses (Chen et al., 2022). Given the potential amplification of extreme events due to climate change in some places, accurate short-term and long-term rainfall forecasting becomes increasingly important for the management of infrastructure, economic resilience and the protection of human life.  
 
 Traditionally, short-term rainfall predictions have relied upon numerical weather forecasting methods. However, numerical weather forecasting has posed challenges to accurate prediction such as introducing large model uncertainties and relying upon extreme computational demands (Chen et al., 2022). Machine learning models are a useful alternative to conventional models for a few reasons. First, machine learning models offer a relatively inexpensive computational solution to prediction. Second, many models have the advantage of properly handling complex nonlinear relationships from historical data (Mao et al., 2020). Given the inherently nonlinear nature of precipitation processes, machine learning models present an opportunity to improve predictive precipitation capabilities. 
