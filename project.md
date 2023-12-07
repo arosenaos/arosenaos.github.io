@@ -1,5 +1,3 @@
-
-
 **Random Forest Classification of Southern Great Plains Afternoon Precipitation Events**
 
 
@@ -29,7 +27,11 @@ Description: Soil moisture observations measured by surface soil moisture sensor
 3) Product 3: Arkansas-Red Basin River Forecast Center (ABRFC)
 Description: Hourly gridded precipitation based on WSR-88D Nexrad radar precipitation estimates combined with rain gauge reports with extensive quality control (Fulton et al., 1998).
 
-The preprocessing steps involved filtering each product such that only warm season (May - September) days between 2001-2019 were extracted. Then, colocation between the soundings, precipitation, and soil moisture files ensured that all data used exist within a 50-kilometer radius around the ARM SGP Central Facility site. The colocation procedure 
+The preprocessing steps involved filtering each product such that only warm season (May - September) days between 2001-2019 were extracted. Then, colocation between the soundings, precipitation, and soil moisture files ensured that all data used exist within a 50-kilometer radius around the ARM SGP Central Facility site. While all sondewnpn files originated from the same latitude and longitude pair (36.61,-97.49), OKMSOIL fractional water index is measured at over 100 different stations scattered across the Southern Great Plains region, and ABRFC precipitation is collected by satellite and thus extends across an even larger spatial domain. In order to colocate soil moisture with the sounding profiles, a single station located closest to the ARM SGP CF site was chosen. Precipitation was colocated with soundings (and the soil moisture station) by taking an average of daily precipitation across a 0.5 degree in both the latitude and longitude directions. Figure 1 below displays the colocation process. 
+
+![](assets/IMG/download.png){: width="1000" }
+
+*Figure 1: Colocation of sondewnpn radiosonde profiles with OKMSOIL and ABRFC products. The multicolored swath shows the ABRFC full domain and the blue patch indicates the ABRFC subdomain selected for this study*      
 
 Once all products were temporally and geographically filtered, missing/incomplete/physically unrealistic data were filled with NAN values. Then, all files were filtered such that only the files that did not contain an excessive amount of missing information remained. 
 
