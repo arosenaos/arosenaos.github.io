@@ -118,7 +118,7 @@ After establishing the best random forest classifier determined by the optimum h
 
 *Figure 5: Feature Importances for determining Afternoon Precipitation Events.*
 
-![](assets/IMG/confusion_matrix.png){: width="700" }
+![](assets/IMG/confusion_matrix.png){: width="500" }
 
 *Figure 6: Confusion Matrix of RandomForestClassifier.*
 
